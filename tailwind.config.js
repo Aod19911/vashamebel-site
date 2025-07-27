@@ -5,18 +5,16 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // ЯВНО УКАЗЫВАЕМ КЛАССЫ, КОТОРЫЕ НЕЛЬЗЯ УДАЛЯТЬ
+  // ЭТОТ БЛОК РЕШАЕТ ПРОБЛЕМУ
   safelist: [
     'bg-primary',
     'bg-secondary',
-    'bg-primary-dark',
-    'hover:bg-primary-dark',
     'text-primary',
+    'bg-background',
     'text-text',
     'text-text-dark',
-    'bg-background',
-    // Добавьте сюда любые другие классы, которые могут пропадать
-    // Например, для прозрачного хэдера:
+    'hover:bg-primary-dark',
+    // Классы для прозрачного хэдера
     'bg-white/20',
     'hover:bg-white/30',
     'backdrop-blur-sm',
