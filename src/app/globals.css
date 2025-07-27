@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+
+:root {
+  /* Здесь мы определяем все наши кастомные цвета */
+  /* Tailwind автоматически создаст для них классы: bg-primary, text-secondary и т.д. */
+  --color-background: #1a202c; /* Темно-синий/серый фон */
+  --color-foreground: #edf2f7;   /* Светло-серый текст по умолчанию */
+  
+  --color-primary: #2dd4bf;       /* Яркий бирюзовый (акцент) */
+  --color-primary-dark: #14b8a6; /* Бирюзовый для ховера */
+  --color-secondary: #2d3748;     /* Чуть светлее фона для карточек */
+  --color-text: #edf2f7;          /* Светло-серый текст */
+  --color-text-dark: #a0aec0;    /* Более темный серый текст */
+
+  /* Вы также можете определить шрифты и другие переменные здесь */
+  --font-sans: "Inter", sans-serif; /* Пример */
+}
+
+html {
+  scroll-behavior: smooth;
+}
