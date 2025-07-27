@@ -34,6 +34,7 @@ export default function Header() {
         <Link href="/" onClick={closeMenu} className="text-primary font-bold text-2xl">
           Ваша Мебель
         </Link>
+        <Link href="tel:+375255122567" className="text-text">+375 (25) 512-25-67</Link>
 
         {/* Навигация для больших экранов */}
         <div className="hidden md:flex space-x-6 text-text items-center">
