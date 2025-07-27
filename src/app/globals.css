@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 
-:root {
+@theme {
   /* Здесь мы определяем все наши кастомные цвета */
   /* Tailwind автоматически создаст для них классы: bg-primary, text-secondary и т.д. */
   --color-background: #1a202c; /* Темно-синий/серый фон */
