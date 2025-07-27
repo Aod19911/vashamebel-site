@@ -5,14 +5,21 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-
-   safelist: [
+  // ЯВНО УКАЗЫВАЕМ КЛАССЫ, КОТОРЫЕ НЕЛЬЗЯ УДАЛЯТЬ
+  safelist: [
     'bg-primary',
     'bg-secondary',
     'bg-primary-dark',
     'hover:bg-primary-dark',
     'text-primary',
-    // Вы можете добавить сюда любые другие классы, которые пропадают
+    'text-text',
+    'text-text-dark',
+    'bg-background',
+    // Добавьте сюда любые другие классы, которые могут пропадать
+    // Например, для прозрачного хэдера:
+    'bg-white/20',
+    'hover:bg-white/30',
+    'backdrop-blur-sm',
   ],
   theme: {
     extend: {
