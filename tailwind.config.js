@@ -5,6 +5,15 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+
+   safelist: [
+    'bg-primary',
+    'bg-secondary',
+    'bg-primary-dark',
+    'hover:bg-primary-dark',
+    'text-primary',
+    // Вы можете добавить сюда любые другие классы, которые пропадают
+  ],
   theme: {
     extend: {
       colors: {
