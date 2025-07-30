@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer"; 
+import { ModalProvider } from "@/context/ModalContext"; // Импорт провайдера
+import ContactModal from "@/components/ContactModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,15 +25,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ru">
-      {/* Эти классы теперь будут работать, потому что они определены в @theme */ }
-      <body className={`${inter.className} bg-background text-foreground`}>
-        <div className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">
-            {children}
-          </main>
-          <Footer />
-        </div>
+      <body>
+        <ModalProvider> {/* 1. Оборачиваем всё в провайдер */}
+          <div className={`${inter.className} bg-background text-text`}>
+            <div className="flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-grow">{children}</main>
+              <Footer />
+            </div>
+          </div>
+          <ContactModal /> {/* 2. Добавляем модальное окно сюда */}
+        </ModalProvider>
       </body>
     </html>
   );

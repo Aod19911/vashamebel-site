@@ -1,6 +1,7 @@
 'use client'; 
-
+import { FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+
 import Link from 'next/link';
 // 1. Импортируем иконки для меню
 import { FaBars, FaTimes } from 'react-icons/fa';
@@ -43,8 +44,18 @@ export default function Header() {
           <Link href="/#about" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">О нас</Link>
           <Link href="/sales"  className="block text-center py-2 text-text hover:text-primary">Скидки и Рассрочка</Link>
           <Link href="/#contact" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">Контакты</Link>
+          
         </div>
-        
+        <div className="flex space-x-4 mt-6 md:mt-0">
+                  <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl ">
+                    <FaInstagram />
+                  </a>
+                  
+                  <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+                    <FaViber />
+                  </a>
+                </div>
+                
         <Link 
           href="#contact" 
           className={`hidden md:block text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 ${isScrolled ? 'bg-primary hover:bg-primary-dark' : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30'}`}

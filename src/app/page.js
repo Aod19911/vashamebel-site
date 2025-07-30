@@ -6,6 +6,8 @@ import { FaBuilding, FaDraftingCompass, FaHardHat, FaTruck, FaWarehouse, FaScrew
 import ProjectCard from '@/components/ProjectCard';
 import { projectTypes } from '@/data/projects';
 import FadeIn from '@/components/FadeIn';
+import ContactForm from '@/components/ContactForm'
+import { FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
 
 
 
@@ -180,45 +182,22 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-text">Свяжитесь с нами</h2>
             <p className="text-lg text-text-dark mt-2">Готовы обсудить ваш проект? Оставьте заявку, и мы вам перезвоним!</p>
             <div className="mt-4 h-1 w-24 bg-primary mx-auto"></div>
+            <div className="flex space-x-4 mt-6 md:mt-0">
+                      <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+                        <FaInstagram />
+                      </a>
+                      <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+                        <FaTelegramPlane />
+                      </a>
+                      <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+                        <FaViber />
+                      </a>
+                    </div>
           </div>
 
           {/* Форма */}
           <div className="max-w-2xl mx-auto">
-            <form action="https://formspree.io/f/xvgqqgjp" method="POST" className="space-y-6">
-              {/* Имя */}
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-text-dark mb-2">Ваше имя</label>
-                <input 
-                  type="text" 
-                  id="name" 
-                  name="name" 
-                  className="w-full p-3 rounded-lg bg-background border border-gray-600 focus:border-primary focus:ring-1 focus:ring-primary transition"
-                  placeholder="Иван Иванов"
-                />
-              </div>
-
-              
-              {/* Телефон */}
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-text-dark mb-2">Ваш телефон</label>
-                <input 
-                  type="tel" 
-                  id="phone" 
-                  name="phone" 
-                  className="w-full p-3 rounded-lg bg-background border border-gray-600 focus:border-primary focus:ring-1 focus:ring-primary transition"
-                  placeholder="+375 (29) 123-45-67"
-                />
-              </div>
-              {/* Кнопка отправки */}
-              <div className="text-center">
-                <button 
-                  type="submit" 
-                  className="bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg"
-                >
-                  Отправить заявку
-                </button>
-              </div>
-            </form>
+            <ContactForm />
           </div>
         </div>
       </section>

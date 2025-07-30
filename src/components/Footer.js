@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
 
+
 export default function Footer() {
   return (
     <footer className="bg-secondary border-t border-gray-700 py-8">

@@ -2,8 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { projectsData, projectTypes } from '@/data/projects'; // Импортируем наши данные
 
-export default function ProjectCategoryPage({ params }) {
-  const { slug } = params; // Получаем slug из URL (например, 'wardrobes')
+export default async function ProjectCategoryPage({ params }) {
+  const { slug } = await params; // Получаем slug из URL (например, 'wardrobes')
 
   // Находим информацию о текущей категории (чтобы получить заголовок)
   const currentType = projectTypes.find(type => type.slug === slug);
@@ -36,19 +36,22 @@ export default function ProjectCategoryPage({ params }) {
         {/* Сетка с проектами этой категории */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredProjects.map(project => (
-            <div key={project.id} className="bg-secondary rounded-lg overflow-hidden shadow-lg">
-              <div className="relative w-full h-64">
+            <Link key={project.id} href={`/projects/${slug}/${project.slug}`}>
+              <div className="bg-secondary rounded-lg overflow-hidden shadow-lg hover:shadow-primary/30 transition-shadow duration-300 cursor-pointer">
+                <div className="relative w-full h-64">
+                {/* В mainImage теперь основное фото для карточки */}
                 <Image
-                  src={project.image}
+                  src={project.mainImage} 
                   alt={project.name}
                   fill
                   className="object-cover"
-                />
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-text">{project.name}</h3>
+                </div>
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-text">{project.name}</h3>
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
 
