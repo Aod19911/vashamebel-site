@@ -5,6 +5,7 @@ import ServiceCard from '@/components/ServiceCard';
 import { FaBuilding, FaDraftingCompass, FaHardHat, FaTruck, FaWarehouse, FaScrewdriver, FaRulerCombined } from 'react-icons/fa';
 import ProjectCard from '@/components/ProjectCard';
 import { projectTypes } from '@/data/projects';
+import FadeIn from '@/components/FadeIn';
 
 
 
@@ -46,7 +47,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section (уже был) */}
-      <section className="relative h-[80vh] min-h-[500px] flex items-center justify-center text-center text-white">
+      <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center text-center text-white">
         <Image src="https://picsum.photos/1920/1080" alt="Фон мебели" fill priority className="z-0 object-cover"/>
         <div className="absolute inset-0 bg-black/60 z-10"></div>
         <div className="relative z-20 px-4">
@@ -62,6 +63,7 @@ export default function HomePage() {
       </section>
 
       {/* === НАША НОВАЯ СЕКЦИЯ "УСЛУГИ" === */}
+      <FadeIn>
       <section id="services" className="py-20 bg-background">
         <div className="container mx-auto px-6">
           {/* Заголовок секции */}
@@ -84,7 +86,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </FadeIn>
         {/* === СЕКЦИЯ "О КОМПАНИИ" === */}
+        <FadeIn>
       <section id="about" className="py-20 bg-secondary">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -124,6 +128,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </FadeIn>
+      <FadeIn>
       <section id="projects" className="py-20 bg-background">
         <div className="container mx-auto px-6">
           {/* Заголовок секции */}
@@ -148,6 +154,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      </FadeIn>
       <section className="py-20 bg-primary">
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
@@ -164,6 +171,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      <FadeIn>
       {/* === СЕКЦИЯ "КОНТАКТЫ" === */}
       <section id="contact" className="py-20 bg-secondary">
         <div className="container mx-auto px-6">
@@ -176,7 +184,7 @@ export default function HomePage() {
 
           {/* Форма */}
           <div className="max-w-2xl mx-auto">
-            <form className="space-y-6">
+            <form action="https://formspree.io/f/xvgqqgjp" method="POST" className="space-y-6">
               {/* Имя */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-text-dark mb-2">Ваше имя</label>
@@ -214,7 +222,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
+      </FadeIn>
     </>
   );
 }

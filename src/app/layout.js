@@ -6,8 +6,18 @@ import Footer from "@/components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ваша Мебель - Мебель на заказ",
-  description: "Индивидуальный дизайн, качественные материалы и профессиональная установка.",
+  // 1. Основные мета-теги для поисковиков (Google, Яндекс)
+  title: "Ваша Мебель - Изготовление корпусной мебели на заказ",
+  description: "Проектирование и производство кухонь, шкафов, прихожих и другой корпусной мебели по индивидуальным размерам. Качество, гарантия, быстрые сроки.",
+  
+
+  openGraph: {
+    title: "Ваша Мебель - Мебель на заказ от производителя",
+    description: "Воплотим любую вашу идею в качественную и стильную мебель.",
+    images: ['https://picsum.photos/1200/630?random=0'], 
+    url: 'https://vashamebel-site.vercel.app', 
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }) {

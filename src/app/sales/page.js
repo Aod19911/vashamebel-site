@@ -1,4 +1,5 @@
 import Link from "next/link";
+import FadeIn from '@/components/FadeIn';
 
 export default function SalesPage() {
   return (
@@ -31,6 +32,7 @@ export default function SalesPage() {
           </div>
 
           {/* Блок "Рассрочка" */}
+          <FadeIn>
           <div className="bg-secondary p-8 rounded-lg shadow-lg md:flex md:items-center md:gap-8">
              <div className="md:w-1/3 text-center mb-6 md:mb-0">
                <span className="text-8xl text-primary font-bold">0%</span>
@@ -45,6 +47,7 @@ export default function SalesPage() {
               </p>
             </div>
           </div>
+          </FadeIn>
         </div>
 
         {/* Кнопка "Назад на главную" */}
