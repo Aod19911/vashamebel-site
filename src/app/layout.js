@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer"; 
 import { ModalProvider } from "@/context/ModalContext"; // Импорт провайдера
 import ContactModal from "@/components/ContactModal";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({ children }) {
     <html lang="ru">
       <body>
         <ModalProvider> {/* 1. Оборачиваем всё в провайдер */}
+          <ScrollToTop />
           <div className={`${inter.className} bg-background text-text`}>
             <div className="flex flex-col min-h-screen">
               <Header />

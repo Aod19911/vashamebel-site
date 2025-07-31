@@ -1,13 +1,16 @@
+'use client'
 import Image from 'next/image';
 import Link from 'next/link';
 // Наши новые импорты
 import ServiceCard from '@/components/ServiceCard';
-import { FaBuilding, FaDraftingCompass, FaHardHat, FaTruck, FaWarehouse, FaScrewdriver, FaRulerCombined } from 'react-icons/fa';
+import { FaBuilding, FaDraftingCompass, FaHardHat, FaTruck, FaScrewdriver, FaRulerCombined, FaPhoneAlt, FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
 import ProjectCard from '@/components/ProjectCard';
 import { projectTypes } from '@/data/projects';
 import FadeIn from '@/components/FadeIn';
-import ContactForm from '@/components/ContactForm'
-import { FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
+import ContactForm from '@/components/ContactForm';
+import { useModal } from '@/context/ModalContext'
+import SectionSeparator from '@/components/SectionSeparator';
+
 
 
 
@@ -46,8 +49,10 @@ const services = [
 ];
 
 export default function HomePage() {
+  const { openModal } = useModal();
   return (
     <>
+    
       {/* Hero Section (уже был) */}
       <section className="relative h-[90vh] min-h-[600px] flex items-center justify-center text-center text-white">
         <Image src="https://picsum.photos/1920/1080" alt="Фон мебели" fill priority className="z-0 object-cover"/>
@@ -63,6 +68,7 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+      <SectionSeparator />
 
       {/* === НАША НОВАЯ СЕКЦИЯ "УСЛУГИ" === */}
       <FadeIn>
@@ -88,6 +94,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <div className="h-20 bg-gradient-to-b from-background via-primary/10 to-secondary"></div>
       </FadeIn>
         {/* === СЕКЦИЯ "О КОМПАНИИ" === */}
         <FadeIn>
@@ -131,6 +138,7 @@ export default function HomePage() {
         </div>
       </section>
       </FadeIn>
+      <SectionSeparator />
       <FadeIn>
       <section id="projects" className="py-20 bg-background">
         <div className="container mx-auto px-6">
@@ -156,6 +164,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      
       </FadeIn>
       <section className="py-20 bg-primary">
         <div className="container mx-auto px-6 text-center">
@@ -165,42 +174,62 @@ export default function HomePage() {
           <p className="text-lg text-gray-200 mb-8 max-w-2xl mx-auto">
             Получите бесплатную консультацию и предварительный расчет стоимости вашего проекта. Наш дизайнер поможет воплотить ваши идеи в жизнь!
           </p>
-          <Link 
-            href="#contact" 
+          {/* !!! ГЛАВНОЕ ИЗМЕНЕНИЕ: Заменяем Link на Button и вызываем openModal !!! */}
+          <button 
+            onClick={() => openModal("Консультация с главной страницы")} // Можно передать любой текст, который будет отображаться в почте
             className="bg-white hover:bg-gray-200 text-primary-dark font-bold py-3 px-8 rounded-lg transition-colors text-lg shadow-lg"
           >
             Получить консультацию
-          </Link>
+          </button>
         </div>
       </section>
+        {/* === СЕКЦИЯ "КОНТАКТЫ" === */}
       <FadeIn>
-      {/* === СЕКЦИЯ "КОНТАКТЫ" === */}
-      <section id="contact" className="py-20 bg-secondary">
-        <div className="container mx-auto px-6">
-          {/* Заголовок секции */}
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-text">Свяжитесь с нами</h2>
-            <p className="text-lg text-text-dark mt-2">Готовы обсудить ваш проект? Оставьте заявку, и мы вам перезвоним!</p>
-            <div className="mt-4 h-1 w-24 bg-primary mx-auto"></div>
-            <div className="flex space-x-4 mt-6 md:mt-0">
-                      <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
-                        <FaInstagram />
-                      </a>
-                      <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
-                        <FaTelegramPlane />
-                      </a>
-                      <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
-                        <FaViber />
-                      </a>
-                    </div>
-          </div>
+        <section id="contact" className="py-20 bg-secondary">
+          <div className="container mx-auto px-6">
+            {/* Заголовок секции */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-text">Свяжитесь с нами</h2>
+              <p className="text-lg text-text-dark mt-2">Мы всегда готовы ответить на ваши вопросы</p>
+              <div className="mt-4 h-1 w-24 bg-primary mx-auto"></div>
+            </div>
 
-          {/* Форма */}
-          <div className="max-w-2xl mx-auto">
-            <ContactForm />
+            {/* === НАШ НОВЫЙ БЛОК С КОНТАКТАМИ === */}
+            <div className="text-center mb-12 max-w-2xl mx-auto">
+              {/* Телефон */}
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold text-text mb-2">Позвоните нам</h3>
+                <Link href="tel:+375255122567" className="text-primary text-2xl font-bold hover:underline flex items-center justify-center gap-2">
+                  <FaPhoneAlt />
+                  <span>+375 (25) 512-25-67</span>
+                </Link>
+              </div>
+
+              {/* Мессенджеры */}
+              <div>
+                <h3 className="text-xl font-semibold text-text mb-4">Или напишите в мессенджер</h3>
+                <div className="flex justify-center space-x-6">
+                  <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-4xl">
+                    <FaInstagram />
+                  </a>
+                  <a href="tg://resolve?domain=имя_пользователя" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-4xl">
+                    <FaTelegramPlane />
+                  </a>
+                  <a href="viber://chat?number=%2B375255122567" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-4xl">
+                    <FaViber />
+                  </a>
+                </div>
+              </div>
+              <div className="my-10 h-px bg-gray-700"></div> {/* Разделительная линия */}
+            </div>
+            
+            {/* Форма */}
+            <div className="max-w-2xl mx-auto">
+                <p className="text-lg text-text-dark mt-2 text-center mb-8">Или оставьте заявку, и мы сами вам перезвоним!</p>
+                <ContactForm />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </FadeIn>
     </>
   );

@@ -1,69 +1,68 @@
 'use client'; 
-import { FaInstagram, FaTelegramPlane, FaViber } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-
 import Link from 'next/link';
-// 1. Импортируем иконки для меню
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaInstagram, FaViber, FaPhoneAlt } from 'react-icons/fa';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  // 2. Новое состояние для отслеживания открытия мобильного меню
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Функция для закрытия меню при клике на ссылку
   const closeMenu = () => setIsMenuOpen(false);
+
+  // --- НАША НОВАЯ ФУНКЦИЯ ДЛЯ ПЛАВНОЙ ПРОКРУТКИ ---
+  const handleHashLinkClick = (event, hash) => {
+    // Если мы уже на главной, предотвращаем стандартный переход
+    if (window.location.pathname === '/') {
+      event.preventDefault();
+    }
+    
+    // Находим целевую секцию по ID
+    const targetElement = document.querySelector(hash);
+    if (targetElement) {
+      // И плавно прокручиваем к ней
+      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+    
+    closeMenu(); // Закрываем мобильное меню
+  };
 
   return (
     <header 
-      className={`
-        fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out
-        ${isScrolled || isMenuOpen ? 'bg-secondary shadow-lg' : 'bg-transparent'}
-      `}
+      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ease-in-out ${isScrolled || isMenuOpen ? 'bg-secondary shadow-lg' : 'bg-transparent'}`}
     >
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" onClick={closeMenu} className="text-primary font-bold text-2xl">
+        {/* Левый блок */}
+        <Link href="/" onClick={closeMenu} className="text-primary font-bold text-2xl z-10">
           Ваша Мебель
         </Link>
-        <Link href="tel:+375255122567" className="text-text">+375(25)512-25-67</Link>
 
-        {/* Навигация для больших экранов */}
-        <div className="hidden md:flex space-x-6 text-text items-center">
-          <Link href="/#services" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">Услуги</Link>
-          <Link href="/#projects" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">Проекты</Link>
-          <Link href="/#about" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">О нас</Link>
-          <Link href="/sales"  className="block text-center py-2 text-text hover:text-primary">Скидки и Рассрочка</Link>
-          <Link href="/#contact" className="hover:text-primary transition-all duration-200 ease-in-out hover:scale-105">Контакты</Link>
-          
+        {/* Центральный блок (десктоп) */}
+        <div className="hidden md:flex items-center space-x-6">
+          <Link href="/#services" onClick={(e) => handleHashLinkClick(e, '#services')}>Услуги</Link>
+          <Link href="/#projects" onClick={(e) => handleHashLinkClick(e, '#projects')}>Проекты</Link>
+          <Link href="/#about" onClick={(e) => handleHashLinkClick(e, '#about')}>О нас</Link>
+          <Link href="/sales">Скидки</Link> {/* Обычная ссылка, без обработчика */}
+          <Link href="/#contact" onClick={(e) => handleHashLinkClick(e, '#contact')}>Контакты</Link>
         </div>
-        <div className="flex space-x-4 mt-6 md:mt-0">
-                  <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl ">
-                    <FaInstagram />
-                  </a>
-                  
-                  <a href="#" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
-                    <FaViber />
-                  </a>
-                </div>
-                
-        <Link 
-          href="#contact" 
-          className={`hidden md:block text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 ${isScrolled ? 'bg-primary hover:bg-primary-dark' : 'bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/30'}`}
-        >
-          Связаться с нами
-        </Link>
         
-        {/* 3. Иконка-гамбургер для мобильных экранов */}
+        {/* Правый блок (десктоп) */}
+        <div className="hidden md:flex items-center space-x-6">
+          <Link href="tel:+375255122567" className="text-text font-bold hover:text-primary transition-colors">+375(25)512-25-67</Link>
+          <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+            <FaInstagram />
+          </a>
+          <a href="viber://chat?number=%2B375255122567" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-2xl">
+            <FaViber />
+          </a>
+        </div>
+        
+        {/* Гамбургер (мобильные) */}
         <div className="md:hidden">
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-text text-2xl">
             {isMenuOpen ? <FaTimes /> : <FaBars />}
@@ -71,13 +70,25 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* 4. Выпадающее мобильное меню */}
+      {/* Выпадающее мобильное меню */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'} bg-secondary pb-4`}>
-        <Link href="/#services" onClick={closeMenu} className="block text-center py-2 text-text hover:text-primary">Услуги</Link>
-        <Link href="/#projects" onClick={closeMenu} className="block text-center py-2 text-text hover:text-primary">Проекты</Link>
-        <Link href="/#about" onClick={closeMenu} className="block text-center py-2 text-text hover:text-primary">О нас</Link>
-        <Link href="/sales"  className="block text-center py-2 text-text hover:text-primary">Скидки и Рассрочка</Link>
-        <Link href="/#contact" onClick={closeMenu} className="block text-center py-2 text-text hover:text-primary">Контакты</Link>
+        <Link href="/#services" onClick={(e) => handleHashLinkClick(e, '#services')} className="block text-center py-3 text-lg text-text hover:bg-primary/20 transition-colors">Услуги</Link>
+        <Link href="/#projects" onClick={(e) => handleHashLinkClick(e, '#projects')} className="block text-center py-3 text-lg text-text hover:bg-primary/20 transition-colors">Проекты</Link>
+        <Link href="/#about" onClick={(e) => handleHashLinkClick(e, '#about')} className="block text-center py-3 text-lg text-text hover:bg-primary/20 transition-colors">О нас</Link>
+        <Link href="/sales" onClick={closeMenu} className="block text-center py-3 text-lg text-text hover:bg-primary/20 transition-colors">Скидки</Link>
+        <Link href="/#contact" onClick={(e) => handleHashLinkClick(e, '#contact')} className="block text-center py-3 text-lg text-text hover:bg-primary/20 transition-colors">Контакты</Link>
+        
+        <div className="border-t border-gray-700 mx-8 my-4"></div>
+        
+        <Link href="tel:+375255122567" onClick={closeMenu} className="flex items-center justify-center gap-2 py-3 text-lg text-text">
+          <FaPhoneAlt />
+          <span>+375(25)512-25-67</span>
+        </Link>
+        
+        <div className="flex justify-center space-x-6 mt-4">
+          <a href="https://www.instagram.com/vasha_mebel.mogilev/" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-3xl"><FaInstagram /></a>
+          <a href="viber://chat?number=%2B375255122567" target="_blank" rel="noopener noreferrer" className="text-text-dark hover:text-primary transition-colors text-3xl"><FaViber /></a>
+        </div>
       </div>
     </header>
   );
